@@ -22,25 +22,6 @@ GH = "https://api.github.com"
 st.set_page_config(page_title="리훈 카페24 관리", page_icon="🛍️", layout="wide")
 
 
-# ──────────────────────── 비밀번호 잠금 ────────────────────────
-def check_password():
-    if st.session_state.get("auth_ok"):
-        return
-    want = st.secrets.get("APP_PASSWORD", "")
-    st.title("🔒 리훈 카페24 관리")
-    pw = st.text_input("비밀번호", type="password")
-    if pw:
-        if want and pw == want:
-            st.session_state.auth_ok = True
-            st.rerun()
-        else:
-            st.error("비밀번호가 틀렸습니다.")
-    st.stop()
-
-
-check_password()
-
-
 # ──────────────────────── GitHub API ────────────────────────
 def _token():
     t = st.secrets.get("GITHUB_TOKEN", "")
